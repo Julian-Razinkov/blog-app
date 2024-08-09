@@ -2,16 +2,18 @@ import { Blog } from '@prisma/client';
 import {
 	Body,
 	Controller,
+	Delete,
 	Example,
 	Get,
 	Middlewares,
+	Patch,
 	Path,
 	Post,
 	Response,
 	Route,
 	SuccessResponse,
 } from 'tsoa';
-import { BlogDto, CreateBlogDto } from '../dto';
+import { BlogDto, CreateBlogDto, UpdateBlogDto } from '../dto';
 import { StatusCodes } from '../enum/statusCodes';
 import { ValidateErrorJson } from '../errors/validateErrorJson';
 import { BlogService } from '../service/blogService';
@@ -32,6 +34,15 @@ export class BlogController extends Controller {
 	}
 
 	/**
+	 * Endpoint for getting the blog all blog posts
+	 *
+	 */
+	@Get()
+	public async getBlogs(): Promise<BlogDto[]> {
+		return this.blogService.getBlogs();
+	}
+
+	/**
 	 * Endpoint for creating a blog post
 	 * @param CreateBlogDto
 	 *
@@ -42,6 +53,7 @@ export class BlogController extends Controller {
 		description: 'Short summary of the post',
 		body: 'The text of the post',
 		image: 'http://url/to/image',
+		createdAt: '2024.12.24',
 	})
 	@Response<ValidateErrorJson>(StatusCodes.BAD_REQUEST, 'Validation failed', {
 		message: 'Validation failed',
@@ -59,5 +71,31 @@ export class BlogController extends Controller {
 	): Promise<BlogDto> {
 		this.setStatus(StatusCodes.SUCCESSFULY_CREATED);
 		return this.blogService.createBlog(requestBody);
+	}
+
+	/**
+	 * Endpoint for updating a blog post
+	 * @param blogId
+	 * @param requestBody
+	 *
+	 */
+	@SuccessResponse(StatusCodes.SUCCESS, 'Updated')
+	@Patch('{blogId}')
+	public async updateBlog(
+		@Path() blogId: string,
+		@Body() requestBody: UpdateBlogDto
+	): Promise<BlogDto> {
+		return this.blogService.updateBlog(blogId, requestBody);
+	}
+
+	/**
+	 * Endpoint for deleting a blog post
+	 * @param blogId
+	 *
+	 */
+	@SuccessResponse(StatusCodes.SUCCESS, 'Deleted')
+	@Delete('{blogId}')
+	public async deleteBlog(@Path() blogId: string): Promise<BlogDto> {
+		return this.blogService.deleteBlog(blogId);
 	}
 }

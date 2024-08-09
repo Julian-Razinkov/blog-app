@@ -4,4 +4,5 @@ export interface BlogDto {
 	description: string | null;
 	body: string;
 	image: string | null;
+	createdAt: string;
 }
