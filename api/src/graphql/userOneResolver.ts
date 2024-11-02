@@ -1,16 +1,13 @@
-import { QueryResolvers } from '../types';
+import { toUserSchema } from '../mappings/toUserSchema';
 import { prisma } from '../prisma';
+import { QueryResolvers } from '../types';
 
-export const userOneResolver = async (_: any, { id }: any) => {
-	const { name, email, password } = await prisma.user.findUniqueOrThrow({
-		where: {
-			id,
-		},
-	});
+export const userOneResolver: QueryResolvers['userOne'] = async (
+	_,
+	{},
+	{ user }
+) => {
+	if (!user) throw new Error('Unauthenticated');
 
-	return {
-		name,
-		email,
-		password,
-	};
+	return user;
 };

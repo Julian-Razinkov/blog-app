@@ -16,6 +16,8 @@ model User {
   name     String
   password String
   blogs    Blog[]
+
+  @@unique([email])
 }
 
 model Blog {

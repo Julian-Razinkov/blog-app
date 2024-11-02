@@ -1,6 +1,5 @@
+import { User } from './types';
 
-export type DataSourceContext = {
-	dataSources: {
-		userID: string
-	};
+export type InvocationContext = {
+	user: User | null;
 };

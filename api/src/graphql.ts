@@ -4,6 +4,8 @@ import { createBlogResolver } from './graphql/createBlogResolver';
 import { getBlogResolver } from './graphql/getBlogResovler';
 import { userOneResolver } from './graphql/userOneResolver';
 import { deleteBlogResovler } from './graphql/deleteBlogResovler';
+import { createUserResolver } from './graphql/createUserResolver';
+import { loginUserResolver } from './graphql/loginUserResolver';
 
 export const resolvers: Resolvers = {
 	Query: {
@@ -14,5 +16,7 @@ export const resolvers: Resolvers = {
 	Mutation: {
 		createBlog: createBlogResolver,
 		deleteBlog: deleteBlogResovler,
+		createUser: createUserResolver,
+		loginUser: loginUserResolver,
 	},
 };
