@@ -1,8 +1,6 @@
 import { Blog } from '@prisma/client';
-import { Blog as gqlBlog } from '../types';
-import { prisma } from '../prisma';
 
-//TODO: Find out how to write mappers for gql types
+//TODO: Rewrite
 export const toBlogSchema = (blog: Blog) => {
 	return {
 		__typename: 'Blog' as const,

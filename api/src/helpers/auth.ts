@@ -16,8 +16,8 @@ export async function getUserByToken(token: string): Promise<User | null> {
 	if (user == null) return null;
 
 	return {
+		id: user.id,
 		email: user.email,
-		password: user.password,
 		name: user.name,
 	};
 }

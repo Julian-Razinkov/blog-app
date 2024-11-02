@@ -102,8 +102,8 @@ export type QueryGetBlogArgs = {
 export type User = {
   __typename?: 'User';
   email: Scalars['String']['output'];
+  id: Scalars['String']['output'];
   name: Scalars['String']['output'];
-  password: Scalars['String']['output'];
 };
 
 
@@ -245,8 +245,8 @@ export type QueryResolvers<ContextType = InvocationContext, ParentType extends R
 
 export type UserResolvers<ContextType = InvocationContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
