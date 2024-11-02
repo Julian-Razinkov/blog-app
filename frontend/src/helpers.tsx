@@ -1,0 +1,1 @@
+// Figure out how to write a helper function that accepts a object with keys as fields of the form and a values as validation rules for each 
