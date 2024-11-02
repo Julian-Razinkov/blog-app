@@ -16,7 +16,7 @@ const startServer = async () => {
 	const { url } = await startStandaloneServer(server, {
 		// The context that is passed here should be created and connected in the codegenConfig and also should be created
 		context: async ({ req, res }) => {
-			res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins
+			res.setHeader('Access-Control-Allow-Origin', '*');
 			res.setHeader(
 				'Access-Control-Allow-Methods',
 				'GET, POST, PUT, DELETE, OPTIONS'
@@ -25,9 +25,11 @@ const startServer = async () => {
 				'Access-Control-Allow-Headers',
 				'Content-Type, Authorization'
 			);
-
 			const token = req.headers.authorization || '';
-			const user = await getUserByToken(token);
+			let user = null;
+			try {
+				user = await getUserByToken(token);
+			} catch (error) {}
 
 			return {
 				user,

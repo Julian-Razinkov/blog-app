@@ -5,7 +5,7 @@ import { theme } from '../theme'
 import { Loading } from "./loading";
 import { AppBar } from "./appbar";
 
-export function Page({ children, loading }: { children: ReactNode, loading: boolean }) {
+export function Page({ children, loading = false }: { children: ReactNode, loading?: boolean }) {
   return (
     <Box sx={{ backgroundColor: theme.palette.background.default, height: '100%' }}>
       <Box flexGrow={1}>

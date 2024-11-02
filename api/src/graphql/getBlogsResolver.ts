@@ -17,9 +17,9 @@ export const getBlogsResolver: QueryResolvers['getBlogs'] = async (
 		topic: blog.topic,
 		createdAt: blog.createdAt.toISOString(),
 		author: {
+			id: 'Test',
 			name: 'Test',
 			email: 'Test@test.com',
-			password: '123',
 		},
 	}));
 };
