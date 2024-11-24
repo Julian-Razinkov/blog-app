@@ -9,16 +9,12 @@ import { Typography } from "@mui/material";
 export function Dashboard() {
 
   const { data, loading, error } = useQuery(BLOGS);
-  const { name } = useAuth()
+  const { data: userData } = useAuth()
 
-  if (error) {
-    console.log(error)
-    return <span>Oopsie...</span>
-  }
 
   return (
     <Page loading={loading}>
-      <Typography variant="h2">{name}</Typography>
+      <Typography variant="h2">{userData?.name}</Typography>
       <Grid container spacing={3} gridAutoRows='1fr' sx={{ paddingY: 3 }} justifyContent="center">
         {data?.getBlogs.map(blog => (
           <Grid key={blog.id} maxWidth={400} size={{ xs: 12, sm: 6, md: 4 }}>
