@@ -3,32 +3,36 @@ import { gql } from "../__generated__";
 import { Navigate, useLocation } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { Loading } from "../components/loading";
+import { publicRoutes } from "../constants/publicRoutes";
+import { ApolloError } from "@apollo/client";
+
 
 
 type AuthContext = {
-  id: string;
-  email: string;
-  name: string;
+  data: {
+    id: string;
+    email: string;
+    name: string;
+  } | undefined
+  loading: boolean
+  error: ApolloError | undefined
 }
 
 const context = createContext<AuthContext | null>(null)
 
 export function AuthContext({ children }: { children: ReactNode }) {
-  const { data, loading } = useQuery(userQuery);
-  const [userState, setUserState] = useState<AuthContext | null>(null)
-  const location = useLocation()
+  const token = localStorage.getItem('token');
+  const localtion = useLocation();
 
+  if ((!token || token === '') && !publicRoutes.includes(localtion.pathname)) return <Navigate to="/" replace />
+  const { data, loading, error, refetch } = useQuery(userQuery);
+
+  // May not be the best approach to do it like so
   useEffect(() => {
-    if (data?.userOne != null) {
-      setUserState(data.userOne)
-    }
-  }, [data]);
+    refetch()
+  }, [token])
 
-
-  if (loading) return <Loading></Loading>
-  if (data == null && !location.pathname.includes('/login')) return <Navigate to="/login" replace />
-
-  return <context.Provider value={userState}>{children}</context.Provider>
+  return <context.Provider value={{ data: data?.userOne, error, loading }}>{children}</context.Provider>
 }
 
 export function useAuth() {

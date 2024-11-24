@@ -1,25 +1,29 @@
 import { MutationResolvers } from '../types';
 import { prisma } from '../prisma';
+import { InvocationContext } from '../context';
 
 //TODO: create a Lazy wrapper that fetches only requested field
 //TODO: create toBlogSchema mapper
 export const createBlogResolver: MutationResolvers['createBlog'] = async (
 	_,
-	{ input }
+	{ input },
+	{ user }: InvocationContext
 ) => {
+	if (!user) throw new Error('Auth failed');
+
 	const blog = await prisma.blog.create({
 		data: {
 			body: input.body,
 			title: input.title,
 			description: input.description,
 			topic: input.topic,
-			authorId: 'f9dda0c1-5370-485a-8875-2ce0e1d0977e',
+			authorId: user.id,
 		},
 	});
 
 	const author = await prisma.user.findUniqueOrThrow({
 		where: {
-			id: 'f9dda0c1-5370-485a-8875-2ce0e1d0977e',
+			id: user.id,
 		},
 	});
 

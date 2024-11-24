@@ -10,9 +10,9 @@ const httpLink = createHttpLink({
   uri: 'http://localhost:4000',
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*', // This is ignored by the browser, but server should allow it
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization', // Set allowed headers
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE', // Optional: specify allowed methods
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
   }
 })
 
