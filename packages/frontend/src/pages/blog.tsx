@@ -82,10 +82,10 @@ export function BlogPage() {
           <Typography variant="h2">{blog.title}</Typography>
           <Typography variant="h6">{blog.description}</Typography>
           <Stack direction="row" alignItems='center' spacing={3}>
-            <Avatar src="../public/cardTest.jpg" />
+            <Avatar src="/cardTest.jpg" />
             <Typography>{blog.author.name}</Typography>
           </Stack>
-          <img src='../public/cardTest.jpg' style={{
+          <img src='/cardTest.jpg' style={{
             borderRadius: '10px',
             height: '300px',
             width: 'auto'

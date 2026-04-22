@@ -1,7 +1,7 @@
 import { AppBar as MuiAppBar, Button, Divider, Stack, Toolbar, Typography } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { theme } from '../theme'
-
+import React from 'react'
 
 export function AppBar() {
   const currentPage = useLocation();
@@ -18,7 +18,7 @@ export function AppBar() {
     >
       <Toolbar disableGutters sx={{ alignItems: 'center', justifyContent: 'space-between', paddingX: '2rem' }}>
         <Link to="/dashboard">
-          <img src="../public/logo.png" width={143} height={54} />
+          <img src="/logo.png" width={143} height={54} />
         </Link>
         <Stack direction='row' spacing={4} alignItems='center' sx={{ ml: 10, width: '80%' }}>
           <Typography sx={{ fontWeight: 800, fontSize: '18px' }} >

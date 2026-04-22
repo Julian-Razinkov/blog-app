@@ -19,7 +19,7 @@ export function BlogCard(props: BlogCardProps) {
         sx={{
           maxHeight: '300px'
         }}
-        image="../public/cardTest.jpg"
+        image="/cardTest.jpg"
       />
       <Divider />
       <CardContent>
